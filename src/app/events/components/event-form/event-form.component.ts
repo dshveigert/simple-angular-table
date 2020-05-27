@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-event-form',
-  templateUrl: './event-form.component.html',
+  templateUrl: './event-form.component.pug',
   styleUrls: ['./event-form.component.styl']
 })
 export class EventFormComponent implements OnInit {

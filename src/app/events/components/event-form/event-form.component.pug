@@ -1,0 +1,128 @@
+form([formGroup]='eventForm', (ngSubmit)='submitForm()')
+  .row
+    label(title='Required') Type:
+      span *
+      input(type="text", formControlName="type")
+    label(title='Required') Cow ID:
+      span *
+      input(type="number", formControlName="cowId")
+    label(title='Required') Animal ID:
+      span *
+      input(type="number", formControlName="animalId")
+
+  .row
+    label
+      | Current Group ID:
+      input(type="number", formControlName="currentGroupId")
+    label
+      | Current Group Name:
+      input(type="text", formControlName="currentGroupName")
+
+  .row
+    label
+      | Destination Group ID:
+      input(type="number", formControlName="destinationGroup")
+    label
+      | Destination Group Name:
+      input(type="text", formControlName="destinationGroupName")
+
+  .row
+    label
+      | New Group ID:
+      input(type="number", formControlName="newGroupId")
+    label
+      | New Group Name:
+      input(type="text", formControlName="newGroupName")
+
+  .row
+    label
+      | Age in days:
+      input(type="number", formControlName="ageInDays")
+    label
+      | Lactation number:
+      input(type="number", formControlName="lactationNumber")
+    label
+      | Days in lactation:
+      input(type="number", formControlName="daysInLactation")
+
+  .row
+    label
+      | Start DateTime:
+      input(type="number", formControlName="startDateTime")
+    label
+      | Reporting DateTime:
+      input(type="number", formControlName="reportingDateTime")
+
+  .row
+    label
+      | Health Index:
+      input(type="number", formControlName="healthIndex")
+    label
+      | Min value DateTime:
+      input(type="number", formControlName="minValueDateTime")
+    label
+      | End date:
+      input(type="number", formControlName="endDate")
+
+  .row
+    label
+      | Alert type:
+      input(type="text", formControlName="alertType")
+    label
+      | Duration:
+      input(type="number", formControlName="duration")
+
+  .row
+    label
+      | Original start DateTime:
+      input(type="number", formControlName="originalStartDateTime")
+    label
+      | End DateTime:
+      input(type="number", formControlName="endDateTime")
+
+  .row
+    label
+      | Days in pregnancy:
+      input(type="number", formControlName="daysInPregnancy")
+    label
+      | Heat index peak:
+      input(type="number", formControlName="heatIndexPeak")
+
+  .row
+    label
+      | Calving Ease:
+      input(type="text", formControlName="calvingEase")
+    label
+      | Newborns:
+      input(type="number", formControlName="newborns")
+    label
+      | Birth date calculated:
+      input(type="number", formControlName="birthDateCalculated")
+
+  .row
+    label
+      | Sire:
+      input(type="text", formControlName="sire")
+    label
+      | Breeding Number:
+      input(type="number", formControlName="breedingNumber")
+
+  .row
+    label
+      | Is out of breeding window:
+      input(type="text", formControlName="isOutOfBreedingWindow")
+    label
+      | Interval:
+      input(type="number", formControlName="interval")
+
+  .row
+    label
+      | Deletable:
+      input(type="text", formControlName="deletable")
+
+  input(type="hidden", formControlName="eventId")
+
+  .action
+    .Required * - required fields
+    button(type="button", (click)="clearForm($event)") Cancel
+    button(type="submit", [disabled]='isDisabled') {{actionButton}}

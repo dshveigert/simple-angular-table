@@ -5,7 +5,7 @@ import { SubscriptionLike } from 'rxjs';
 
 @Component({
   selector: 'app-events-page',
-  templateUrl: './events-page.component.html',
+  templateUrl: './events-page.component.pug',
   styleUrls: ['./events-page.component.styl']
 })
 export class EventsPageComponent implements OnInit, OnDestroy {

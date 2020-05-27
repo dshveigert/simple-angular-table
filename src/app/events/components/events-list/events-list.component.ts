@@ -5,7 +5,7 @@ import { IEvent } from '../../../api/models';
 
 @Component({
   selector: 'app-events-list',
-  templateUrl: './events-list.component.html',
+  templateUrl: './events-list.component.pug',
   styleUrls: ['./events-list.component.styl'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,0 +1,129 @@
+table(class="table-content")
+  thead
+  tr
+    th #
+    th Type
+    th ID
+    th.group Group
+    th Age
+    th Lactation
+    th Date times
+    th Health
+    th Distress
+    th Calving
+    th Birth Date
+    th Sire
+    th Deletable
+    th.actions
+  tbody
+    ng-container(*ngIf='events|async as list;')
+      ng-container(*ngIf='list?.length > 0; else isEmpty')
+        ng-container(*ngFor='let item of list;trackBy:trackById;')
+          tr
+            td {{item.eventId}}
+            td {{eventType(item)}}
+            td
+              .group
+                .name Cow: {{item.cowId}}
+
+              .group
+                .name Animal: {{item.animalId}}
+
+
+            td.group
+              .group(*ngIf='item.currentGroupId || item.currentGroupName')
+                .name Current Group:
+                .id # {{item?.currentGroupId}}
+                .value {{item?.currentGroupName}}
+
+              .group(*ngIf='item.newGroupId || item.newGroupName')
+                .name New Group:
+                .id # {{item?.newGroupId}}
+                .value {{item?.newGroupName}}
+
+
+            td: span(*ngIf='item.ageInDays') {{item.ageInDays}} days
+            td
+              .group
+                .name(*ngIf='item.lactationNumber') Number {{item.lactationNumber}}
+                .value(*ngIf='item.daysInLactation') {{item.daysInLactation}} days
+
+
+            td
+              .group(*ngIf='item.startDateTime')
+                .name Start: {{item?.startDateTime|dateFormat}}
+
+              .group(*ngIf='item.reportingDateTime')
+                .name Report: {{item?.reportingDateTime|dateFormat}}
+
+
+            td
+              .group(*ngIf='item.healthIndex')
+                .name Health Index: {{item.healthIndex}}
+
+              .group(*ngIf='item.heatIndexPeak')
+                .name Heat Index Peak: {{item.heatIndexPeak}}
+
+              .group(*ngIf='item.endDate')
+                .name End date: {{item.endDate|dateFormat:'M/DD/YYYY'}}
+
+              .group(*ngIf='item.minValueDateTime')
+                .name Min value: {{item.minValueDateTime|dateFormat}}
+
+
+            td
+              .group(*ngIf='item.alertType')
+                .name Alert type: {{item.alertType}}
+
+              .group(*ngIf='item.duration')
+                .name Duration: {{item.duration}}
+
+              .group(*ngIf='item.originalStartDateTime')
+                .name Start time: {{item.originalStartDateTime|dateFormat}}
+
+              .group(*ngIf='item.endDateTime')
+                .name End time: {{item.endDateTime|dateFormat}}
+
+
+            td
+              .group
+                .name(*ngIf='item.destinationGroup || item.destinationGroupName') Destination Group:
+                .id(*ngIf='item.destinationGroup') # {{item?.destinationGroup}}
+                .value {{item?.destinationGroupName}}
+
+              .group
+                .name(*ngIf='item.calvingEase') Ease: {{item.calvingEase}}
+                .name(*ngIf='item.oldLactationNumber') Old lactation number: {{item.oldLactationNumber}}
+                .name(*ngIf='item.newborns') Newborns: {{item.newborns}}
+                .group(*ngIf='item.daysInPregnancy')
+                  .name Pregnancy: {{item.daysInPregnancy}} days
+
+
+
+            td
+              span(*ngIf='item.birthDateCalculated') Calculated: {{item.birthDateCalculated|dateFormat:'M/DD/YYYY'}}
+
+            td
+              .group(*ngIf='item.sire')
+                .name {{item.sire}}
+
+              .group(*ngIf='item.breedingNumber')
+                .name Breeding Number: {{item.breedingNumber}}
+
+              .group
+                .name Out of breeding window: {{boolConverter(item.isOutOfBreedingWindow)}}
+
+              .group(*ngIf='item.interval')
+                .name Interval: {{item.interval}}
+
+
+            td {{boolConverter(item.deletable)}}
+
+            td.actions
+              .buttons
+                button((click)='edit(item)') Edit
+                button((click)='deleteEvent(item)') Delete
+
+    ng-template(#isEmpty)
+      tr
+        td.empty-content([attr.colspan]='14') List is empty

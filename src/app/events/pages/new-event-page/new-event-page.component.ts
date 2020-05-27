@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-event-page',
-  templateUrl: './new-event-page.component.html',
+  templateUrl: './new-event-page.component.pug',
   styleUrls: ['./new-event-page.component.styl']
 })
 export class NewEventPageComponent {

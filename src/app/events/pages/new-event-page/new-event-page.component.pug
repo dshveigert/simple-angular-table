@@ -1,0 +1,7 @@
+section
+  .title
+    h1 New event
+    app-event-loader([loader]="events.loading$")
+    .new-event: a(routerLink='/events') Events list
+  .content
+    app-event-form((formSubmit)='createEvent($event)', (formCancel)='cancel()')

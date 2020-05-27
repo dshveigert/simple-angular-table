@@ -1,0 +1,7 @@
+section
+  .title
+    h1 Events
+    app-event-loader([loader]="events.loading$")
+    .new-event: a(routerLink='/events/new') New event
+  .content
+    app-events-list([events]='events.data$', (delete)='delete($event)')
