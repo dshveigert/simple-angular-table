@@ -1,0 +1,7 @@
+section
+  .title
+    h1 Edit event #{{eventId}}
+    app-event-loader([loader]="events.loading$")
+    .new-event: a(routerLink='/events') Events list
+  .content
+    app-event-form((formSubmit)='eventUpdate($event)', (formCancel)='cancel()', action='edit', [eventItem]='event')

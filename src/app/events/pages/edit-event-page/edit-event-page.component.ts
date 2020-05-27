@@ -7,7 +7,7 @@ import { IEvent } from '../../../api/models';
 
 @Component({
   selector: 'app-edit-event-page',
-  templateUrl: './edit-event-page.component.html',
+  templateUrl: './edit-event-page.component.pug',
   styleUrls: ['./edit-event-page.component.styl']
 })
 export class EditEventPageComponent implements OnInit, OnDestroy {
