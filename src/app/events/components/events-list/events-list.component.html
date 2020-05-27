@@ -1,0 +1,141 @@
+<table class="table-content">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Type</th>
+    <th>ID</th>
+    <th class="group">Group</th>
+    <th>Age</th>
+    <th>Lactation</th>
+    <th>Date times</th>
+    <th>Health</th>
+    <th>Distress</th>
+    <th>Calving</th>
+    <th>Birth Date</th>
+    <th>Sire</th>
+    <th>Deletable</th>
+    <th class="actions"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngIf='events|async as list;'>
+    <ng-container *ngIf='list?.length > 0; else isEmpty'>
+      <ng-container *ngFor='let item of list;trackBy:trackById;'>
+        <tr>
+          <td>{{item.eventId}}</td>
+          <td>{{eventType(item)}}</td>
+          <td>
+            <div class="group">
+              <div class="name">Cow: {{item.cowId}}</div>
+            </div>
+            <div class="group">
+              <div class="name">Animal: {{item.animalId}}</div>
+            </div>
+          </td>
+          <td class="group">
+            <div *ngIf='item.currentGroupId || item.currentGroupName' class="group">
+              <div class="name">Current Group: </div>
+              <div class="id"># {{item?.currentGroupId}}</div>
+              <div class="value">{{item?.currentGroupName}}</div>
+            </div>
+            <div *ngIf='item.newGroupId || item.newGroupName' class="group">
+              <div class="name">New Group: </div>
+              <div class="id"># {{item?.newGroupId}}</div>
+              <div class="value">{{item?.newGroupName}}</div>
+            </div>
+          </td>
+          <td><span *ngIf='item.ageInDays'>{{item.ageInDays}} days</span></td>
+          <td>
+            <div class="group">
+              <div *ngIf='item.lactationNumber' class="name">Number {{item.lactationNumber}}</div>
+              <div *ngIf='item.daysInLactation' class="value">{{item.daysInLactation}} days</div>
+            </div>
+          </td>
+          <td>
+            <div *ngIf='item.startDateTime' class="group">
+              <div class="name">Start: {{item?.startDateTime|dateFormat}}</div>
+            </div>
+            <div *ngIf='item.reportingDateTime' class="group">
+              <div class="name">Report: {{item?.reportingDateTime|dateFormat}}</div>
+            </div>
+          </td>
+          <td>
+            <div *ngIf='item.healthIndex' class="group">
+              <div class="name">Health Index: {{item.healthIndex}}</div>
+            </div>
+            <div *ngIf='item.heatIndexPeak' class="group">
+              <div class="name">Heat Index Peak: {{item.heatIndexPeak}}</div>
+            </div>
+            <div *ngIf='item.endDate' class="group">
+              <div class="name">End date: {{item.endDate|dateFormat:'M/DD/YYYY'}}</div>
+            </div>
+            <div *ngIf='item.minValueDateTime' class="group">
+              <div class="name">Min value: {{item.minValueDateTime|dateFormat}}</div>
+            </div>
+          </td>
+          <td>
+            <div *ngIf='item.alertType' class="group">
+              <div class="name">Alert type: {{item.alertType}}</div>
+            </div>
+            <div *ngIf='item.duration' class="group">
+              <div class="name">Duration: {{item.duration}}</div>
+            </div>
+            <div *ngIf='item.originalStartDateTime' class="group">
+              <div class="name">Start time: {{item.originalStartDateTime|dateFormat}}</div>
+            </div>
+            <div *ngIf='item.endDateTime' class="group">
+              <div class="name">End time: {{item.endDateTime|dateFormat}}</div>
+            </div>
+          </td>
+          <td>
+            <div class="group">
+              <div *ngIf='item.destinationGroup || item.destinationGroupName' class="name">Destination Group: </div>
+              <div *ngIf='item.destinationGroup' class="id"># {{item?.destinationGroup}}</div>
+              <div class="value">{{item?.destinationGroupName}}</div>
+            </div>
+            <div class="group">
+              <div *ngIf='item.calvingEase' class="name">Ease: {{item.calvingEase}}</div>
+              <div *ngIf='item.oldLactationNumber' class="name">Old lactation number: {{item.oldLactationNumber}}</div>
+              <div *ngIf='item.newborns' class="name">Newborns: {{item.newborns}}</div>
+              <div *ngIf='item.daysInPregnancy' class="group">
+                <div class="name">Pregnancy: {{item.daysInPregnancy}} days</div>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span *ngIf='item.birthDateCalculated'>Calculated: {{item.birthDateCalculated|dateFormat:'M/DD/YYYY'}}</span>
+          </td>
+          <td>
+            <div *ngIf='item.sire' class="group">
+              <div class="name">{{item.sire}}</div>
+            </div>
+            <div *ngIf='item.breedingNumber' class="group">
+              <div class="name">Breeding Number: {{item.breedingNumber}}</div>
+            </div>
+            <div class="group">
+              <div class="name">Out of breeding window: {{boolConverter(item.isOutOfBreedingWindow)}}</div>
+            </div>
+            <div *ngIf='item.interval' class="group">
+              <div class="name">Interval: {{item.interval}}</div>
+            </div>
+          </td>
+          <td>
+            {{boolConverter(item.deletable)}}
+          </td>
+          <td class="actions">
+            <div class="buttons">
+              <button (click)="edit(item)">Edit</button>
+              <button (click)="deleteEvent(item)">Delete</button>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    <ng-template #isEmpty>
+      <tr>
+        <td [attr.colspan]='14' class='empty-content'>List is empty</td>
+      </tr>
+    </ng-template>
+  </ng-container>
+  </tbody>
+</table>
